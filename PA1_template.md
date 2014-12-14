@@ -220,17 +220,22 @@ interval_mean_weekday = seq(1:288)
 
 Seperate out weekend and weekdays and calculate a mean number of steps for each 5-minute interval:
 
+```r
+weekday <- subset(data, data$Day == "Weekday")
+weekend <- subset(data, data$Day == "Weekend")
+```
+
 
 ```r
 ## seperate out Weekend days and calculate a mean number of steps for each interval
 for (i in 1:length(interval)) {
-    interval_mean_weekend[i] <- mean(subset(data$steps, data$interval == interval[i]), na.rm = TRUE)
+    interval_mean_weekend[i] <- mean(subset(weekend$steps, weekend$interval == interval[i]), na.rm = TRUE)
 }
 
 
 ## seperate out weekday days and calculate a mean number of steps for each interval
 for (i in 1:length(interval)) {
-     interval_mean_weekday[i] <- mean(subset(data$steps, data$interval == interval[i]), na.rm = TRUE)
+     interval_mean_weekday[i] <- mean(subset(weekday$steps, weekday$interval == interval[i]), na.rm = TRUE)
 }
 ```
 
@@ -243,4 +248,4 @@ plot(interval, interval_mean_weekend, type = "l", main = "Weekend", ylab = "Step
 plot(interval, interval_mean_weekday, type = "l", main = "Weekday", ylab = "Steps")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-24-1.png) 
+![](PA1_template_files/figure-html/unnamed-chunk-25-1.png) 
